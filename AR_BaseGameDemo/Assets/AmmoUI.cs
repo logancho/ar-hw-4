@@ -7,18 +7,21 @@ namespace MyFirstARGame
 {
     public class AmmoUI : MonoBehaviour
     {
-        int ammo = 3;
+        public GameObject cam;
+        private ProjectileLauncher pl;
+        //int ammo = 3;
         Text ammoText;
         // Start is called before the first frame update
         void Start()
         {
+            pl = cam.GetComponent<ProjectileLauncher>();
             ammoText = gameObject.GetComponent<Text>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            ammoText.text = "Ammo: " + ammo.ToString();
+            ammoText.text = "AMMO: " + pl.ballSupply.ToString();
         }
     }
 }

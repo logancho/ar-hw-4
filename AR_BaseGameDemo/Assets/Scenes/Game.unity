@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab270288583c9c48a9b55a5cb428ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 715633765}
 --- !u!1 &124042691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,6 +1601,7 @@ MonoBehaviour:
   initialSpeed: 8
   goalPrefab: {fileID: 1071832047139458166, guid: 869e5d5f9301c4be888348e2d0feceaa,
     type: 3}
+  ballSupply: 3
 --- !u!114 &715633775
 MonoBehaviour:
   m_ObjectHideFlags: 0
