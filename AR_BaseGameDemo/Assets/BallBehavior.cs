@@ -55,7 +55,8 @@ namespace MyFirstARGame
         {
             if (!pause)
             {
-                if (collision.collider.CompareTag("Goal") && collidable)
+                if (collision.collider.CompareTag("Goal") && collidable
+                    && !collision.collider.GetComponent<GoalManager>().pause)
                 {
                     collision.collider.GetComponent<GoalManager>().goalHealth--;
                     Destroy(gameObject);

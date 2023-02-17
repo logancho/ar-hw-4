@@ -44,7 +44,29 @@ namespace MyFirstARGame
             {
                 enemyGoal.GetComponent<GoalManager>().reset = true;
             }
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            GameObject[] allObjects = GameObject.FindGameObjectsWithTag("Ball");
+            foreach (GameObject obj in allObjects)
+            {
+                Destroy(obj);
+            }
+
+            GameObject[] allGoals = GameObject.FindGameObjectsWithTag("Goal");
+            foreach (GameObject goal in allGoals)
+            {
+                goal.GetComponent<GoalManager>().pause = false;
+                goal.GetComponent<GoalManager>().goalHealth = 5;
+            }
+
+            //
+            GameObject[] allUI = GameObject.FindGameObjectsWithTag("UI");
+            foreach (GameObject ui in allUI)
+            {
+                ui.SetActive(false);
+            }
+
+
+
         }
     }
 }
