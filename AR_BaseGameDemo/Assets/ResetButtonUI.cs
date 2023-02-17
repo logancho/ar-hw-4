@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 using UnityEngine.SceneManagement;
 
 namespace MyFirstARGame
@@ -9,13 +10,11 @@ namespace MyFirstARGame
     {
         public bool otherPlayerReset = false;
         GameObject enemyGoal = null;
+        GameObject timer;
 
         void FindEnemyGoal()
         {
-            //if (enemyGoal == null)
-            //{
-                enemyGoal = GameObject.Find("Goal(Clone)");
-            //}
+            enemyGoal = GameObject.Find("Goal(Clone)");
         }
 
         //// Update is called once per frame
@@ -33,40 +32,43 @@ namespace MyFirstARGame
         {
             if (enemyGoal != null)
             {
-                //otherPlayerReset = enemyGoal.reset;
                 otherPlayerReset = enemyGoal.GetComponent<GoalManager>().reset;
+                if (otherPlayerReset)
+                {
+                    Restart();
+                    enemyGoal.GetComponent<GoalManager>().reset = false;
+                }
             }
         }
 
         public void Restart()
         {
-            if (enemyGoal != null)
-            {
-                enemyGoal.GetComponent<GoalManager>().reset = true;
-            }
-
             GameObject[] allObjects = GameObject.FindGameObjectsWithTag("Ball");
             foreach (GameObject obj in allObjects)
             {
-                Destroy(obj);
+                PhotonNetwork.Destroy(obj);
             }
 
             GameObject[] allGoals = GameObject.FindGameObjectsWithTag("Goal");
             foreach (GameObject goal in allGoals)
             {
                 goal.GetComponent<GoalManager>().pause = false;
+
                 goal.GetComponent<GoalManager>().goalHealth = 5;
+
+                if (goal.name != "Goal(Clone)")
+                {
+                    goal.GetComponent<GoalManager>().reset = true;
+                }
             }
 
-            //
             GameObject[] allUI = GameObject.FindGameObjectsWithTag("UI");
             foreach (GameObject ui in allUI)
             {
                 ui.SetActive(false);
             }
 
-
-
+            timer.GetComponent<TimerUI>().time = 0;
         }
     }
 }

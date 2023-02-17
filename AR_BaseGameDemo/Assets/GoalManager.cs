@@ -7,13 +7,10 @@ namespace MyFirstARGame
 {
     public class GoalManager : MonoBehaviour
     {
-        //public GameObject goalPrefab;
-        //public GameObject goal1 { get; private set; }
-        //public GameObject goal2 { get; private set; }
-        // Start is called before the first frame update
         [SerializeField]
         private Material[] goalMaterials;
-
+        [SerializeField]
+        private GameObject child;
         int goalID;
         public int goalHealth = 5;
 
@@ -33,8 +30,13 @@ namespace MyFirstARGame
             if (this.goalMaterials.Length > 0)
             {
                 var material = this.goalMaterials[playerId % this.goalMaterials.Length];
-                this.transform.GetComponent<Renderer>().material = material;
+                child.transform.GetComponent<Renderer>().material = material;
             }
         }
+
+        //[PunRPC]
+        //public void ReceiveGoal()
+        //{
+        //}
     }
 }

@@ -25,20 +25,7 @@ namespace MyFirstARGame
 
         void FindEnemyGoal()
         {
-            //if (enemyGoal == null)
-            //{
-                enemyGoal = GameObject.Find("Goal(Clone)");
-                //if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
-                //{
-                //    //Enemy must be 3
-                //    enemyGoal = GameObject.Find("Player_2 Goal");
-                //}
-                //else
-                //{
-                //    //Enemy must be 2
-                //    enemyGoal = GameObject.Find("Player_1 Goal");
-                //}
-            //}
+            enemyGoal = GameObject.Find("Goal(Clone)");
         }
 
         void UpdateEnemyGoalHealth()

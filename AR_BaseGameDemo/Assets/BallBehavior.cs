@@ -9,6 +9,8 @@ namespace MyFirstARGame
     {
         [SerializeField]
         private Material[] ballMaterials;
+        [SerializeField]
+        private GameObject child;
         private bool collidable = true;
         public bool pause = false;
 
@@ -21,7 +23,8 @@ namespace MyFirstARGame
             if (this.ballMaterials.Length > 0)
             {
                 var material = this.ballMaterials[playerId % this.ballMaterials.Length];
-                this.transform.GetComponent<Renderer>().material = material;
+                //this.transform.GetComponent<Renderer>().material = material;
+                child.transform.GetComponent<Renderer>().material = material;
             }
         }
 
@@ -53,13 +56,13 @@ namespace MyFirstARGame
 
         void OnCollisionEnter(Collision collision)
         {
-            if (!pause)
-            {
+            //if (!pause)
+            //{
                 if (collision.collider.CompareTag("Goal") && collidable
                     && !collision.collider.GetComponent<GoalManager>().pause)
                 {
                     collision.collider.GetComponent<GoalManager>().goalHealth--;
-                    Destroy(gameObject);
+                    //Destroy(gameObject);
                 }
                 else
                 {
@@ -67,7 +70,7 @@ namespace MyFirstARGame
                     collidable = false;
                     Debug.Log("hit something other than goal.");
                 }
-            }
+            //}
         }
     }
 }

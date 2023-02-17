@@ -31,24 +31,6 @@ namespace MyFirstARGame
             CheckLoss();
         }
 
-        void FindEnemyGoal()
-        {
-            //if (enemyGoal == null)
-            //{
-                enemyGoal = GameObject.Find("Goal(Clone)");
-                //if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
-                //{
-                //    //Enemy must be 3
-                //    enemyGoal = GameObject.Find("Player_2 Goal");
-                //}
-                //else
-                //{
-                //    //Enemy must be 2
-                //    enemyGoal = GameObject.Find("Player_1 Goal");
-                //}
-            //}
-        }
-
         void SpawnGoal()
         {
             if (!spawnedGoal)
@@ -63,7 +45,7 @@ namespace MyFirstARGame
 
         void SpawnGoalHelp()
         {
-            Vector3 pos = new Vector3(1.0f, 0, 0);
+            Vector3 pos = new Vector3(1.0f, 0.3f, 0);
 
             if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
             {
@@ -73,6 +55,11 @@ namespace MyFirstARGame
 
             this.goal = PhotonNetwork.Instantiate(this.goalPrefab.name, pos, Quaternion.identity, data: initialData);
             this.goal.name = "Player_" + (PhotonNetwork.LocalPlayer.ActorNumber - 1).ToString() + " Goal";
+        }
+
+        void FindEnemyGoal()
+        {
+            enemyGoal = GameObject.Find("Goal(Clone)");
         }
 
         void EndGame()
@@ -86,6 +73,7 @@ namespace MyFirstARGame
                     enemyGoal.GetComponent<GoalManager>().lose = true;
                     Win();
                 }
+
                 if (goal.GetComponent<GoalManager>().goalHealth == 0)
                 {
                     SetGoalPause();
@@ -93,27 +81,12 @@ namespace MyFirstARGame
                     Lose();
                 }
             }
-
-            //For single player testing
-            //if (spawnedGoal)
-            //{
-            //    if (goal.GetComponent<GoalManager>().goalHealth == 0)
-            //    {
-            //        //SetGoalPause();
-            //        //enemyGoal.GetComponent<GoalManager>().lose = true;
-            //        Win();
-            //    }
-            //}
         }
 
         void Win()
         {
-            //Turn on Win UI
             winUI.SetActive(true);
             resetButtonUI.SetActive(true);
-
-            //For single player testing
-            //goal.GetComponent<GoalManager>().pause = true;
         }
 
         void SetGoalPause()
