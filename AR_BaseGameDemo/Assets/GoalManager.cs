@@ -20,6 +20,8 @@ namespace MyFirstARGame
         public bool pause = false;
         public bool lose = false;
 
+        public bool reset = false;
+
         void Awake()
         {
             var photonView = this.transform.GetComponent<PhotonView>();

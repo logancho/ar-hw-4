@@ -159,3 +159,4 @@ MonoBehaviour:
   goalHealth: 5
   pause: 0
   lose: 0
+  reset: 0

@@ -25,25 +25,27 @@ namespace MyFirstARGame
 
         void FindEnemyGoal()
         {
-            if (enemyGoal == null)
-            {
-                if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
-                {
-                    //Enemy must be 3
-                    enemyGoal = GameObject.Find("Player_2 Goal");
-                }
-                else
-                {
-                    //Enemy must be 2
-                    enemyGoal = GameObject.Find("Player_1 Goal");
-                }
-            }
+            //if (enemyGoal == null)
+            //{
+                enemyGoal = GameObject.Find("Goal(Clone)");
+                //if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
+                //{
+                //    //Enemy must be 3
+                //    enemyGoal = GameObject.Find("Player_2 Goal");
+                //}
+                //else
+                //{
+                //    //Enemy must be 2
+                //    enemyGoal = GameObject.Find("Player_1 Goal");
+                //}
+            //}
         }
 
         void UpdateEnemyGoalHealth()
         {
             if (enemyGoal != null)
             {
+                livesText.enabled = true;
                 livesText.text = "ENEMY: " +
                     enemyGoal.GetComponent<GoalManager>().goalHealth.ToString();
             } else

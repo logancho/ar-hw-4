@@ -1228,52 +1228,6 @@ Transform:
   m_Father: {fileID: 1513056495}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &461320278
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 461320279}
-  - component: {fileID: 461320280}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &461320279
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461320278}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.60186744, y: -1.1119419, z: 19.491425}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &461320280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461320278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 146bb06d284514d87ad785e0bbe3f90f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goal2: {fileID: 0}
-  goal3: {fileID: 0}
 --- !u!1 &695846457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2740,6 +2694,7 @@ GameObject:
   - component: {fileID: 1210431089}
   - component: {fileID: 1210431088}
   - component: {fileID: 1210431087}
+  - component: {fileID: 1210431090}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
@@ -2811,7 +2766,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1210431088}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1210431090}
+        m_TargetAssemblyTypeName: MyFirstARGame.ResetButtonUI, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1210431088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2850,6 +2817,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210431085}
   m_CullTransparentMesh: 1
+--- !u!114 &1210431090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210431085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ced9e5e5ad2499ca70460ccfc89d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherPlayerReset: 0
 --- !u!1 &1245303605
 GameObject:
   m_ObjectHideFlags: 0

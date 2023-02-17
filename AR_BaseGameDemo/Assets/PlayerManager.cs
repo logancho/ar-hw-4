@@ -26,26 +26,27 @@ namespace MyFirstARGame
         void Update()
         {
             SpawnGoal();
-            //FindEnemyGoal();
-            //CheckLoss();
+            FindEnemyGoal();
             EndGame();
+            CheckLoss();
         }
 
         void FindEnemyGoal()
         {
-            if (enemyGoal == null)
-            {
-                if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
-                {
-                    //Enemy must be 3
-                    enemyGoal = GameObject.Find("Player_2 Goal");
-                }
-                else
-                {
-                    //Enemy must be 2
-                    enemyGoal = GameObject.Find("Player_1 Goal");
-                }
-            }
+            //if (enemyGoal == null)
+            //{
+                enemyGoal = GameObject.Find("Goal(Clone)");
+                //if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
+                //{
+                //    //Enemy must be 3
+                //    enemyGoal = GameObject.Find("Player_2 Goal");
+                //}
+                //else
+                //{
+                //    //Enemy must be 2
+                //    enemyGoal = GameObject.Find("Player_1 Goal");
+                //}
+            //}
         }
 
         void SpawnGoal()
@@ -76,26 +77,33 @@ namespace MyFirstARGame
 
         void EndGame()
         {
-            ////If both goals exist
-            //if (spawnedGoal && enemyGoal != null)
+            //If both goals exist
+            if (spawnedGoal && enemyGoal != null)
+            {
+                if (enemyGoal.GetComponent<GoalManager>().goalHealth == 0)
+                {
+                    SetGoalPause();
+                    enemyGoal.GetComponent<GoalManager>().lose = true;
+                    Win();
+                }
+                if (goal.GetComponent<GoalManager>().goalHealth == 0)
+                {
+                    SetGoalPause();
+                    goal.GetComponent<GoalManager>().lose = true;
+                    Lose();
+                }
+            }
+
+            //For single player testing
+            //if (spawnedGoal)
             //{
-            //    if (enemyGoal.GetComponent<GoalManager>().goalHealth == 0)
+            //    if (goal.GetComponent<GoalManager>().goalHealth == 0)
             //    {
-            //        SetGoalPause();
-            //        enemyGoal.GetComponent<GoalManager>().lose = true;
+            //        //SetGoalPause();
+            //        //enemyGoal.GetComponent<GoalManager>().lose = true;
             //        Win();
             //    }
             //}
-
-            if (spawnedGoal)
-            {
-                if (goal.GetComponent<GoalManager>().goalHealth == 0)
-                {
-                    //SetGoalPause();
-                    //enemyGoal.GetComponent<GoalManager>().lose = true;
-                    Win();
-                }
-            }
         }
 
         void Win()
@@ -104,8 +112,8 @@ namespace MyFirstARGame
             winUI.SetActive(true);
             resetButtonUI.SetActive(true);
 
-            // for debugging
-            goal.GetComponent<GoalManager>().pause = true;
+            //For single player testing
+            //goal.GetComponent<GoalManager>().pause = true;
         }
 
         void SetGoalPause()

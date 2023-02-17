@@ -28,17 +28,21 @@ namespace MyFirstARGame
         void Update()
         {
             FindGoal();
-            //update pause
+            UpdatePause();
         }
 
         void FindGoal()
         {
-            if (someGoal == null)
-            {
+            //if (someGoal == null)
+            //{
                 //someGoal = GameObject.Find("Player_1 Goal");
-                someGoal = GameObject.Find("Player_0 Goal");
-            }
+                someGoal = GameObject.Find("Goal(Clone)");
+
+                //For single player testing
+                //someGoal = GameObject.Find("Player_0 Goal");
+            //}
         }
+
         void UpdatePause()
         {
             if (someGoal != null)
@@ -49,30 +53,20 @@ namespace MyFirstARGame
 
         void OnCollisionEnter(Collision collision)
         {
-            //if (!pause)
-            //{
-                //Check if collider tag is "Goal"
-                if (collision.collider.CompareTag("Goal") && collidable &&
-                    !collision.collider.GetComponent<GoalManager>().pause)
+            if (!pause)
+            {
+                if (collision.collider.CompareTag("Goal") && collidable)
                 {
                     collision.collider.GetComponent<GoalManager>().goalHealth--;
-
-                    //if (collision.collider.GetComponent<GoalManager>().goalHealth <= 4)
-                    //{
-                    //    //Game over!
-                    //    //Call Game over function
-                    //    Debug.Log("Game over!");
-                    //}
                     Destroy(gameObject);
-                    //Call goal's update points function
                 }
                 else
                 {
-                    //Turn off collider
+                    //Turn off collider if we hit something other than a goal
                     collidable = false;
                     Debug.Log("hit something other than goal.");
                 }
-            //}
+            }
         }
     }
 }
