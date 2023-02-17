@@ -17,6 +17,9 @@ namespace MyFirstARGame
         int goalID;
         public int goalHealth = 5;
 
+        public bool pause = false;
+        public bool lose = false;
+
         void Awake()
         {
             var photonView = this.transform.GetComponent<PhotonView>();

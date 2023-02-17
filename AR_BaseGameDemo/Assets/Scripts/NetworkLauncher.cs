@@ -24,7 +24,7 @@ namespace MyFirstARGame
         /// </summary>
         public event NetworkLauncherJoinedRoomEventHandler JoinedRoom;
 
-        private bool isJoinedToRoom;
+        public bool isJoinedToRoom;
 
         /// <summary>
         /// Gets a value indicating whether we have joined a room.

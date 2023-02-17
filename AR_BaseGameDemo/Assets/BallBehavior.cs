@@ -9,8 +9,12 @@ namespace MyFirstARGame
     {
         [SerializeField]
         private Material[] ballMaterials;
+        private bool collidable = true;
+        public bool pause = false;
 
-        private void Awake()
+        private GameObject someGoal = null;
+
+        void Awake()
         {
             var photonView = this.transform.GetComponent<PhotonView>();
             var playerId = Mathf.Max((int)photonView.InstantiationData[0], 0);
@@ -21,25 +25,54 @@ namespace MyFirstARGame
             }
         }
 
+        void Update()
+        {
+            FindGoal();
+            //update pause
+        }
+
+        void FindGoal()
+        {
+            if (someGoal == null)
+            {
+                //someGoal = GameObject.Find("Player_1 Goal");
+                someGoal = GameObject.Find("Player_0 Goal");
+            }
+        }
+        void UpdatePause()
+        {
+            if (someGoal != null)
+            {
+                pause = someGoal.GetComponent<GoalManager>().pause;
+            }
+        }
+
         void OnCollisionEnter(Collision collision)
         {
-            //Check if collider tag is "Goal"
-            if (collision.collider.CompareTag("Goal"))
-            {
-                collision.collider.GetComponent<GoalManager>().goalHealth--;
-                if (collision.collider.GetComponent<GoalManager>().goalHealth <= 4)
+            //if (!pause)
+            //{
+                //Check if collider tag is "Goal"
+                if (collision.collider.CompareTag("Goal") && collidable &&
+                    !collision.collider.GetComponent<GoalManager>().pause)
                 {
-                    //Game over!
-                    //Call Game over function
-                    Debug.Log("Game over!");
+                    collision.collider.GetComponent<GoalManager>().goalHealth--;
+
+                    //if (collision.collider.GetComponent<GoalManager>().goalHealth <= 4)
+                    //{
+                    //    //Game over!
+                    //    //Call Game over function
+                    //    Debug.Log("Game over!");
+                    //}
+                    Destroy(gameObject);
+                    //Call goal's update points function
                 }
-                Destroy(gameObject);
-                //Call goal's update points function
-            } else
-            {
-                //Turn off collider
-                Debug.Log("hit something other than goal.");
-            }
+                else
+                {
+                    //Turn off collider
+                    collidable = false;
+                    Debug.Log("hit something other than goal.");
+                }
+            //}
         }
     }
 }
